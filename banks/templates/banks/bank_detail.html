@@ -1,0 +1,36 @@
+{% extends 'banks/base.html' %}
+{% block title %}{{ bank }}{% endblock %}
+{% block name %}{{ object }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 text="center">Credits</h4>
+</div>
+<div class="row">
+    <div class="col-2"><h6>Rate</h6></div>
+    <div class="col-2"><h6>Max Loan</h6></div>
+    <div class="col-3"><h6>Min Down Payment</h6></div>
+    <div class="col-3"><h6>Loan Term</h6></div>
+    <div class="col-2"><h6>Calculator</h6></div>
+</div>
+<div class="row">
+
+    {% for credit in bank.credit_set.all %}
+        <div class="col-2">
+            {% for rate in credit.rates.all %} {{ rate }} {% endfor %}
+        </div>
+        <div class="col-2">
+            {{ credit.max_loan }}
+        </div>
+        <div class="col-3">
+            {{ credit.min_down_payment }}
+        </div>
+        <div class="col-3">
+            {{ credit.loan_term }}
+        </div>
+        <div class="col-2">
+            <a href="{{credit.absolute_url}}"><input type="submit" value="Calcul" ></a>
+        </div><br><br>
+    {% endfor %}
+</div>
+{% endblock %}

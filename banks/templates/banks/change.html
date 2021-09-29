@@ -1,0 +1,14 @@
+{% extends 'banks/base.html' %}
+
+{% block title %}{{ bank }}{% endblock %}
+{% block name %}{{ bank }}{% endblock %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Change name</label><br>
+            <input type="text" name="name" placeholder="Bank name">
+        </p>
+        <input type="submit" value="Save" >
+    </form>
+{% endblock %}

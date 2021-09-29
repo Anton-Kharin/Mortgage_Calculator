@@ -1,0 +1,30 @@
+{% extends 'banks/base.html' %}
+
+{% block title %}Banks{% endblock %}
+{% block name %}All Banks{% endblock %}
+{% block content %}
+<div class="row">
+    {% if banks.all %}
+        {% for bank in banks %}
+        <div class="col-4 my-3" >
+            <a href="{{ bank.absolute_url }}">
+                <h5 class="text-center">{{ bank }}</h5>
+            </a>
+            <a href="change/{{bank.pk}}">Change</a>
+            <a href="delete/{{bank.pk}}">Delete</a>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <h3>Enter bank information</h3>
+    {% endif %}
+    <hr>
+    <form method="post" action="{% url 'banks:add' %}">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Bank name">
+        <br><br>
+        <input type="submit" value="Create">
+        <br><br>
+    </form>
+</div>
+{% endblock %}
